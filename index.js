@@ -1,3 +1,13 @@
+const addition = document.querySelector("#add");
+const display = document.querySelector(".display");
+
+addition.addEventListener("click", populateDisplay);
+
+function populateDisplay(){
+console.log(this.innerHTML);
+
+}
+
 function add(a, b) {
     return a + b;
 }
