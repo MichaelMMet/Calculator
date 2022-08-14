@@ -1,0 +1,44 @@
+.calc{
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+}
+
+.display{
+width: 400px;
+height: 200px;
+border: 6px solid purple;
+}
+
+.container{
+margin-top: 20px;
+
+display: flex;
+}
+
+.nums{
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+grid-template-rows: 40px 40px 40px 40px;
+gap: 40px;
+margin-right: 40px;
+}
+
+.nums div{
+border: 1px solid black;
+padding: 10px;
+}
+
+.operators{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.operators div{
+    margin-bottom: 30px;
+    border: 1px solid black;
+    padding: 10px;
+}
