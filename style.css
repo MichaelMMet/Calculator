@@ -6,12 +6,31 @@ align-items: center;
 }
 
 .display{
+    
 width: 400px;
 height: 200px;
 border: 6px solid purple;
 font-size: 30px;
+text-align: center;
+/*
+display: flex;
+z-index: 0;
+flex-direction: column;
+justify-content: end;
+align-items: flex-end;
+*/
 }
 
+/*
+.results{
+    margin-top: 120px;
+    margin-left: 250px;
+    border: 2px solid purple;
+    width: 150px;
+    height: 70px;
+    z-index: 100;
+}
+*/
 .container{
 margin-top: 20px;
 

@@ -6,6 +6,7 @@ const clearBtn = document.querySelector("#clear")
 
 const equals = document.querySelector("#equals")
 const display = document.querySelector(".display");
+const result = document.querySelector(".results")
 const zero = document.querySelector("#zero");
 const one = document.querySelector("#one");
 const two = document.querySelector("#two");
@@ -62,7 +63,9 @@ let firstCalcNum = 0;
 let secondCalcNum = 0;
 let currentNum = 0;
 let ifFirstNum = true;
-let lastNum =0;
+let ifEqualsUsed = false;
+let lastNum = 0;
+
 
 function getNum() {
 
@@ -73,23 +76,53 @@ firstCalcNum = this.innerHTML;
 secondCalcNum = this.innerHTML;
 }
 evenOrOdd++;
-*/
-    if (this.innerHTML === "+" || this.innerHTML === "-" || this.innerHTML === "*" || 
-    this.innerHTML === "\u00F7") {
-        lastNum = currentNum;
-        currentNum = 0;
-        opperator = this.innerHTML;
-        ifFirstNum = true;
-    } else if (this.innerHTML === "=") { 
-        //console.log(lastNum);
-        //console.log(currentNum);
-        console.log(operate(opperator, lastNum, currentNum));
-    }
-    else if (ifFirstNum) {
-        currentNum = parseInt(currentNum) + parseInt(this.innerHTML);
-        ifFirstNum = false;
+*/if (!ifEqualsUsed) {
+
+
+        if (this.innerHTML === "+" || this.innerHTML === "-" || this.innerHTML === "*" ||
+            this.innerHTML === "\u00F7") {
+            lastNum = currentNum;
+            currentNum = 0;
+            opperator = this.innerHTML;
+            ifFirstNum = true;
+        } else if (this.innerHTML === "=") {
+            //console.log(lastNum);
+            //console.log(currentNum);
+            //console.log(operate(opperator, lastNum, currentNum));
+            ifFirstNum = true;
+            display.innerHTML = operate(opperator, lastNum, currentNum);
+            lastNum = operate(opperator, lastNum, currentNum);
+            currentNum = 0;
+            opperator = "";
+            ifEqualsUsed = true;
+            currentDisplay = "";
+        }
+        else if (ifFirstNum) {
+            currentNum = parseInt(currentNum) + parseInt(this.innerHTML);
+            ifFirstNum = false;
+        } else {
+            currentNum += this.innerHTML;
+        }
+
     } else {
-        currentNum += this.innerHTML;
+        if (this.innerHTML === "+" || this.innerHTML === "-" || this.innerHTML === "*" ||
+            this.innerHTML === "\u00F7") {
+            opperator = this.innerHTML;
+            ifFirstNum = true;
+        } else if (this.innerHTML === "=") {
+            ifFirstNum = true;
+            display.innerHTML = operate(opperator, lastNum, currentNum);
+            lastNum = operate(opperator, lastNum, currentNum);
+            console.log(lastNum);
+            currentNum = 0;
+            opperator = "";
+            ifEqualsUsed = true;
+        } else if (ifFirstNum) {
+            currentNum = parseInt(currentNum) + parseInt(this.innerHTML);
+            ifFirstNum = false;
+        } else {
+            currentNum += this.innerHTML;
+        }
     }
     //console.log(currentNum);
 
@@ -98,13 +131,19 @@ evenOrOdd++;
 
 
 function populateDisplay() {
-    // if(this.innerHTML === "+"){
-    //   currentNum = lastNum;
-    // }
-    currentDisplay += this.innerHTML;
-    //currentNum = currentDisplay;
-    //console.log(currentDisplay);
-    display.innerHTML = currentDisplay;
+    if (ifEqualsUsed === false) {
+        // if(this.innerHTML === "+"){
+        //   currentNum = lastNum;
+        // }
+        currentDisplay += this.innerHTML;
+        //currentNum = currentDisplay;
+        //console.log(currentDisplay);
+        display.innerHTML = currentDisplay;
+    } else {
+        currentDisplay += this.innerHTML;
+        display.innerHTML = "ANS" + currentDisplay;
+    }
+
 }
 
 function add(a, b) {
@@ -120,7 +159,7 @@ function subtract(a, b) {
 
 
 function multiply(a, b) {
-     let sum = parseInt(a) * parseInt(b);
+    let sum = parseInt(a) * parseInt(b);
     return sum;
 }
 
@@ -152,16 +191,17 @@ function operate(operator, numOne, numTwo) {
 }
 
 
-function clear(){
- opperator = "";
-evenOrOdd = 0;
-firstCalcNum = 0;
-secondCalcNum = 0;
-currentNum = 0;
-ifFirstNum = true;
-lastNum =0;
-currentDisplay = "";
+function clear() {
+    opperator = "";
+    evenOrOdd = 0;
+    firstCalcNum = 0;
+    secondCalcNum = 0;
+    currentNum = 0;
+    ifFirstNum = true;
+    lastNum = 0;
+    currentDisplay = "";
     display.innerHTML = "";
+    ifEqualsUsed = false;
 }
 
 //console.log(operate("*", 7, 5));
