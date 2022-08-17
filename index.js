@@ -17,6 +17,7 @@ const six = document.querySelector("#six");
 const seven = document.querySelector("#seven");
 const eight = document.querySelector("#eight");
 const nine = document.querySelector("#nine");
+const decimal = document.querySelector("#decimal");
 
 
 additionOp.addEventListener("click", populateDisplay);
@@ -34,7 +35,7 @@ six.addEventListener("click", populateDisplay);
 seven.addEventListener("click", populateDisplay);
 eight.addEventListener("click", populateDisplay);
 nine.addEventListener("click", populateDisplay);
-
+decimal.addEventListener("click", populateDisplay);
 
 additionOp.addEventListener("click", getNum);
 equals.addEventListener("click", getNum);
@@ -53,6 +54,7 @@ six.addEventListener("click", getNum);
 seven.addEventListener("click", getNum);
 eight.addEventListener("click", getNum);
 nine.addEventListener("click", getNum);
+decimal.addEventListener("click", getNum);
 
 
 
@@ -65,11 +67,17 @@ let currentNum = 0;
 let ifFirstNum = true;
 let ifEqualsUsed = false;
 let lastNum = 0;
+let firstNumEntered = false;
+let isDecimalUsed = false;
+
 
 
 function getNum() {
+    /*
 if (!ifEqualsUsed) {
-        if (this.innerHTML === "+" || this.innerHTML === "-" || this.innerHTML === "*" ||
+    if(this.innerHTML === "." && !isDecimalUsed){
+        isDecimalUsed = true;
+    } else*/ if (this.innerHTML === "+" || this.innerHTML === "-" || this.innerHTML === "*" ||
             this.innerHTML === "\u00F7") {
             lastNum = currentNum;
             currentNum = 0;
@@ -77,16 +85,26 @@ if (!ifEqualsUsed) {
             ifFirstNum = true;
         } else if (this.innerHTML === "=") {
             ifFirstNum = true;
-            display.innerHTML = operate(opperator, lastNum, currentNum);
-            lastNum = operate(opperator, lastNum, currentNum);
-            currentNum = 0;
-            opperator = "";
-            ifEqualsUsed = true;
-            currentDisplay = "";
+            if(operate(opperator, lastNum, currentNum) === 0){
+                display.innerHTML = "Nice try buddy"
+                currentDisplay = "";
+            } else {
+                display.innerHTML = operate(opperator, lastNum, currentNum);
+                lastNum = operate(opperator, lastNum, currentNum);
+                currentNum = 0;
+                opperator = "";
+                ifEqualsUsed = true;
+                currentDisplay = "";
+                firstNumEntered = false;
+            }
+            
+
         }
+   
         else if (ifFirstNum) {
             currentNum = parseInt(currentNum) + parseInt(this.innerHTML);
             ifFirstNum = false;
+            firstNumEntered = true;
         } else {
             currentNum += this.innerHTML;
         }
@@ -103,6 +121,8 @@ if (!ifEqualsUsed) {
             console.log(lastNum);
             currentNum = 0;
             opperator = "";
+            currentDisplay = "";
+
             ifEqualsUsed = true;
         } else if (ifFirstNum) {
             currentNum = parseInt(currentNum) + parseInt(this.innerHTML);
@@ -111,6 +131,8 @@ if (!ifEqualsUsed) {
             currentNum += this.innerHTML;
         }
     }
+
+
 }
 
 
@@ -125,8 +147,8 @@ function populateDisplay() {
 }
 
 function add(a, b) {
-
-    return parseInt(a) + parseInt(b);
+    let sum = parseInt(a) + parseInt(b);
+    return Math.round(sum * 10) / 10;
 }
 
 
@@ -143,7 +165,18 @@ function multiply(a, b) {
 
 
 function divide(firstNum, secondNum) {
-    return parseInt(firstNum) / parseInt(secondNum);
+    let sum = parseInt(firstNum) / parseInt(secondNum);
+    if(secondNum === 0){
+        display.innerHTML = "Nice try buddy."
+        opperator = "";
+        currentNum = 0;
+        ifFirstNum = true;
+        lastNum = 0;
+        ifEqualsUsed = false;
+        return 0;
+    } else {
+    return Math.round(sum * 10) / 10;
+    }
 }
 
 
