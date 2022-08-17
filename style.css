@@ -1,36 +1,39 @@
+body{
+    display: flex;
+    justify-content: center;
+    background-color: aliceblue;
+}
+
+header{
+    background-color: black;
+}
+
 .calc{
+width: 600px;
 display: flex;
 justify-content: center;
 flex-direction: column;
 align-items: center;
+background-color: rgb(3, 8, 34);
+border-radius: 50px;
+box-shadow: 10px 10px gray;
+}
+
+.model{
+    color: white;
 }
 
 .display{
-    
+color: white;
 width: 400px;
 height: 200px;
-border: 6px solid purple;
+margin-top: 20px;
+border: 6px solid rgba(255, 255, 255, 0.651);
 font-size: 30px;
 text-align: center;
-/*
-display: flex;
-z-index: 0;
-flex-direction: column;
-justify-content: end;
-align-items: flex-end;
-*/
 }
 
-/*
-.results{
-    margin-top: 120px;
-    margin-left: 250px;
-    border: 2px solid purple;
-    width: 150px;
-    height: 70px;
-    z-index: 100;
-}
-*/
+
 .container{
 margin-top: 20px;
 
@@ -47,8 +50,17 @@ margin-right: 40px;
 
 .nums button{
 border: 1px solid black;
-padding: 10px;
+padding: 14px;
+border-radius: 8px;
+box-shadow: 5px 3px rgb(122, 110, 110);
+text-align: center;
 }
+
+.nums button:active{
+  background-color: rgb(187, 183, 183);
+  box-shadow: 5px 3px rgb(122, 110, 110);
+
+    }
 
 .operators{
     margin-left: 20px;
@@ -62,4 +74,6 @@ padding: 10px;
     margin-bottom: 30px;
     border: 1px solid black;
     padding: 10px;
+    border-radius: 3px;
+    box-shadow: 5px 3px rgb(122, 110, 110);
 }

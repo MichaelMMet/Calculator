@@ -68,17 +68,7 @@ let lastNum = 0;
 
 
 function getNum() {
-
-    /*
-if(evenOrOdd % 2 === 0){
-firstCalcNum = this.innerHTML;
-} else {
-secondCalcNum = this.innerHTML;
-}
-evenOrOdd++;
-*/if (!ifEqualsUsed) {
-
-
+if (!ifEqualsUsed) {
         if (this.innerHTML === "+" || this.innerHTML === "-" || this.innerHTML === "*" ||
             this.innerHTML === "\u00F7") {
             lastNum = currentNum;
@@ -86,9 +76,6 @@ evenOrOdd++;
             opperator = this.innerHTML;
             ifFirstNum = true;
         } else if (this.innerHTML === "=") {
-            //console.log(lastNum);
-            //console.log(currentNum);
-            //console.log(operate(opperator, lastNum, currentNum));
             ifFirstNum = true;
             display.innerHTML = operate(opperator, lastNum, currentNum);
             lastNum = operate(opperator, lastNum, currentNum);
@@ -124,26 +111,17 @@ evenOrOdd++;
             currentNum += this.innerHTML;
         }
     }
-    //console.log(currentNum);
-
-
 }
 
 
 function populateDisplay() {
     if (ifEqualsUsed === false) {
-        // if(this.innerHTML === "+"){
-        //   currentNum = lastNum;
-        // }
         currentDisplay += this.innerHTML;
-        //currentNum = currentDisplay;
-        //console.log(currentDisplay);
         display.innerHTML = currentDisplay;
     } else {
         currentDisplay += this.innerHTML;
         display.innerHTML = "ANS" + currentDisplay;
     }
-
 }
 
 function add(a, b) {
@@ -203,8 +181,4 @@ function clear() {
     display.innerHTML = "";
     ifEqualsUsed = false;
 }
-
-//console.log(operate("*", 7, 5));
-
-//console.log(operate("+", 7, 5));
 
