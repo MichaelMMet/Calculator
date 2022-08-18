@@ -73,11 +73,12 @@ let isDecimalUsed = false;
 
 
 function getNum() {
-    /*
+    
 if (!ifEqualsUsed) {
     if(this.innerHTML === "." && !isDecimalUsed){
         isDecimalUsed = true;
-    } else*/ if (this.innerHTML === "+" || this.innerHTML === "-" || this.innerHTML === "*" ||
+        currentNum += this.innerHTML;
+    } else if (this.innerHTML === "+" || this.innerHTML === "-" || this.innerHTML === "*" ||
             this.innerHTML === "\u00F7") {
             lastNum = currentNum;
             currentNum = 0;
@@ -91,17 +92,19 @@ if (!ifEqualsUsed) {
             } else {
                 display.innerHTML = operate(opperator, lastNum, currentNum);
                 lastNum = operate(opperator, lastNum, currentNum);
+                console.log(operate(opperator, lastNum, currentNum));
                 currentNum = 0;
                 opperator = "";
                 ifEqualsUsed = true;
                 currentDisplay = "";
                 firstNumEntered = false;
+                isDecimalUsed = false;
+
             }
             
 
         }
-   
-        else if (ifFirstNum) {
+        else if (ifFirstNum && this.innerHTML != ".") {
             currentNum = parseInt(currentNum) + parseInt(this.innerHTML);
             ifFirstNum = false;
             firstNumEntered = true;
@@ -109,7 +112,8 @@ if (!ifEqualsUsed) {
             currentNum += this.innerHTML;
         }
 
-    } else {
+    } else if(this.innerHTML === "." && !isDecimalUsed) {
+        isDecimalUsed = true;
         if (this.innerHTML === "+" || this.innerHTML === "-" || this.innerHTML === "*" ||
             this.innerHTML === "\u00F7") {
             opperator = this.innerHTML;
@@ -122,6 +126,7 @@ if (!ifEqualsUsed) {
             currentNum = 0;
             opperator = "";
             currentDisplay = "";
+            isDecimalUsed = false;
 
             ifEqualsUsed = true;
         } else if (ifFirstNum) {
@@ -137,13 +142,15 @@ if (!ifEqualsUsed) {
 
 
 function populateDisplay() {
-    if (ifEqualsUsed === false) {
+    if((!isDecimalUsed && this.innerHTML === ".") || this.innerHTML != "."){
+    if (ifEqualsUsed === false ) {
         currentDisplay += this.innerHTML;
         display.innerHTML = currentDisplay;
     } else {
         currentDisplay += this.innerHTML;
         display.innerHTML = "ANS" + currentDisplay;
     }
+} 
 }
 
 function add(a, b) {
